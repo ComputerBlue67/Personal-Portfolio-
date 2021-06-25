@@ -21,7 +21,7 @@ canvas.addEventListener('mousedown',function(event){
     mouse.y = event.y - canvasPosition.top;
 });
 canvas.addEventListener('mouseup',function(){
-    
+    mouse.click = false;
 })
 //create player
 class Player{
@@ -46,7 +46,21 @@ class Player{
             this.y -= dy/30;
         }
     }
-    draw()
+    draw(){
+        if (mouse.click){
+            ctx.lineWidth = 0.2;
+            ctx.beginPath();
+            ctx.moveTo(this.x, this.y);
+            ctx.lineTo(mouse.x,mouse.y);
+            ctx.stroke();
+        }
+        ctx.fillStyle = 'red';
+        ctx.beginPath();
+        ctx.arc(this.x,this.y,this.radius,0,Math.PI * 2);
+        ctx.fill();
+        ctx.closePath();
+    }
 }
+const player =  new Player();
 // bubbles
 //animation loop
